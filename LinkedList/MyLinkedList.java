@@ -18,6 +18,10 @@ public class MyLinkedList {
         }
     }
     
+    public int getFirst() {
+        return get(0);
+    }
+
     // get element by index
     public int get(int index) {
         if (head == null) {
