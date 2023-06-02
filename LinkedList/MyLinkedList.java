@@ -1,36 +1,36 @@
 package LinkedList;
 
-public class MyLinkedList {
+public class MyLinkedList<T> {
 
-    private Node head;
+    private Node<T> head;
 
-    private class Node {
-        int value;
-        Node next;
+    private class Node<T> {
+        T value;
+        Node<T> next;
 
-        public Node(int value) {
+        public Node(T value) {
             this.value = value;
         }
 
-        public Node(int value, Node next) {
+        public Node(T value, Node<T> next) {
             this.value = value;
             this.next = next;
         }
     }
     
-    public int getFirst() {
+    public T getFirst() {
         return get(0);
     }
 
     // get element by index
-    public int get(int index) {
+    public T get(int index) {
         if (head == null) {
             throw new IllegalStateException("List is empty!");
         } else if (index < 0) {
             throw new IndexOutOfBoundsException(index);
         }
 
-        Node cursor = head;
+        Node<T> cursor = head;
         int indexCursor = 0;
         while (cursor != null) {
             if (indexCursor == index) {
@@ -44,11 +44,11 @@ public class MyLinkedList {
         throw new IndexOutOfBoundsException(index);
     }
 
-    public int popFirst() {
+    public T popFirst() {
         return pop(0);
     }
 
-    public int pop(int index) {
+    public T pop(int index) {
         if (head == null) {
             throw new IllegalStateException("List is empty!");
         } else if (index < 0) {
@@ -56,16 +56,16 @@ public class MyLinkedList {
         }
 
         if (index == 0) {
-            int pop = head.value;
+            T pop = head.value;
             head = head.next;
             return pop;
         }
 
-        Node cursor = head;
+        Node<T> cursor = head;
         int indexCursor = 1;
         while (cursor.next != null) {
             if (indexCursor == index) {
-                int pop = cursor.next.value;
+                T pop = cursor.next.value;
                 cursor.next = cursor.next.next;
                 return pop;
             }
@@ -77,22 +77,22 @@ public class MyLinkedList {
         throw new IndexOutOfBoundsException(index);
     }
 
-    public void add(int value) {
-        Node last = findLast();
+    public void add(T value) {
+        Node<T> last = findLast();
 
         if (last == null) {
-            head = new Node(value);
+            head = new Node<T>(value);
         } else {
-            last.next = new Node(value);
+            last.next = new Node<T>(value);
         }
     }
 
-    private Node findLast(){
+    private Node<T> findLast(){
         if (head == null) {
             return null;
         }
 
-        Node cursor = head;
+        Node<T> cursor = head;
         while (cursor.next != null) {
             cursor = cursor.next;
         }

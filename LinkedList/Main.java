@@ -22,12 +22,11 @@ public class Main {
          javaLinkedList.add(3);
 
          // с помощью собственного объекта 
-         MyLinkedList myLinkedList = new MyLinkedList();
-         myLinkedList.add(1);
-         myLinkedList.add(2);
-         myLinkedList.add(3);
+         MyLinkedList<String> myLinkedList = new MyLinkedList<String>();
+         myLinkedList.add("str1");
+         myLinkedList.add("str2");
+         myLinkedList.add("str3");
 
-         System.out.println(myLinkedList.pop(1));
          System.out.println(myLinkedList);    
     }
 }
