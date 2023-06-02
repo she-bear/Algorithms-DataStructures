@@ -44,6 +44,10 @@ public class MyLinkedList {
         throw new IndexOutOfBoundsException(index);
     }
 
+    public int popFirst() {
+        return pop(0);
+    }
+
     public int pop(int index) {
         if (head == null) {
             throw new IllegalStateException("List is empty!");
