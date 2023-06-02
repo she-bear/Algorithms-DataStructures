@@ -5,10 +5,6 @@ import java.util.LinkedList;
 public class Main {
 
     public static void main(String[] args) {
-        int[] array = new int[100];
-
-        int a = array[76]; // перебора массива НЕ БУДЕТ, сразу обращение к нужному элементу
-        
          // Linked List
          // head <-> ... <-> ... <-> tail 
          
@@ -23,10 +19,14 @@ public class Main {
 
          // с помощью собственного объекта 
          MyLinkedList<String> myLinkedList = new MyLinkedList<String>();
+         System.out.println(myLinkedList.size());
          myLinkedList.add("str1");
          myLinkedList.add("str2");
          myLinkedList.add("str3");
 
-         System.out.println(myLinkedList);    
+         System.out.println(myLinkedList.size());
+         myLinkedList.pop(1);
+         System.out.println(myLinkedList); 
+         System.out.println(myLinkedList.size());  
     }
 }

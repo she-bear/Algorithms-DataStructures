@@ -3,6 +3,7 @@ package LinkedList;
 public class MyLinkedList<T> {
 
     private Node<T> head;
+    private int size;
 
     private class Node<T> {
         T value;
@@ -16,6 +17,10 @@ public class MyLinkedList<T> {
             this.value = value;
             this.next = next;
         }
+    }
+
+    public int size() {
+        return size;
     }
     
     public T getFirst() {
@@ -58,6 +63,7 @@ public class MyLinkedList<T> {
         if (index == 0) {
             T pop = head.value;
             head = head.next;
+            size--;
             return pop;
         }
 
@@ -67,6 +73,7 @@ public class MyLinkedList<T> {
             if (indexCursor == index) {
                 T pop = cursor.next.value;
                 cursor.next = cursor.next.next;
+                size--;
                 return pop;
             }
 
@@ -85,6 +92,9 @@ public class MyLinkedList<T> {
         } else {
             last.next = new Node<T>(value);
         }
+        
+    size++;
+
     }
 
     private Node<T> findLast(){
