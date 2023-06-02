@@ -42,9 +42,36 @@ public class MyLinkedList {
         }
         
         throw new IndexOutOfBoundsException(index);
-        
     }
 
+    public int pop(int index) {
+        if (head == null) {
+            throw new IllegalStateException("List is empty!");
+        } else if (index < 0) {
+            throw new IndexOutOfBoundsException(index);
+        }
+
+        if (index == 0) {
+            int pop = head.value;
+            head = head.next;
+            return pop;
+        }
+
+        Node cursor = head;
+        int indexCursor = 1;
+        while (cursor.next != null) {
+            if (indexCursor == index) {
+                int pop = cursor.next.value;
+                cursor.next = cursor.next.next;
+                return pop;
+            }
+
+            cursor = cursor.next;
+            indexCursor++;
+        }
+        
+        throw new IndexOutOfBoundsException(index);
+    }
 
     public void add(int value) {
         Node last = findLast();

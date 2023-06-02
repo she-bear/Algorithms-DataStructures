@@ -27,7 +27,7 @@ public class Main {
          myLinkedList.add(2);
          myLinkedList.add(3);
 
-         System.out.println(myLinkedList);
-         System.out.println(myLinkedList.get(1));
+         System.out.println(myLinkedList.pop(1));
+         System.out.println(myLinkedList);    
     }
 }
