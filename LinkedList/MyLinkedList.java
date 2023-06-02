@@ -53,6 +53,14 @@ public class MyLinkedList<T> {
         return pop(0);
     }
 
+    public T popLast() {
+        if (head == null) {
+            throw new IllegalStateException("List is empty!");
+        }
+
+        return pop(size - 1);
+    }
+
     public T pop(int index) {
         if (head == null) {
             throw new IllegalStateException("List is empty!");

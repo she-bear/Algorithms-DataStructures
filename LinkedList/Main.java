@@ -19,7 +19,9 @@ public class Main {
          myLinkedList.add("str3");
 
          System.out.println(myLinkedList); 
-         System.out.println(myLinkedList.contains("str2"));
-         System.out.println(myLinkedList.contains("str"));
+         System.out.println(myLinkedList.size());
+         System.out.println(myLinkedList.popLast());
+         System.out.println(myLinkedList.size());
+
     }
 }
