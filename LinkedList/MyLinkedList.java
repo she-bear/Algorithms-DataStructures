@@ -18,6 +18,30 @@ public class MyLinkedList {
         }
     }
     
+    // get element by index
+    public int get(int index) {
+        if (head == null) {
+            throw new IllegalStateException("List is empty!");
+        } else if (index < 0) {
+            throw new IndexOutOfBoundsException(index);
+        }
+
+        Node cursor = head;
+        int indexCursor = 0;
+        while (cursor != null) {
+            if (indexCursor == index) {
+                return cursor.value;
+            }
+
+            cursor = cursor.next;
+            indexCursor++;
+        }
+        
+        throw new IndexOutOfBoundsException(index);
+        
+    }
+
+
     public void add(int value) {
         Node last = findLast();
 
