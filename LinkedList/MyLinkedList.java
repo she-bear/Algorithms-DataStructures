@@ -109,6 +109,20 @@ public class MyLinkedList<T> {
         return cursor;
     }
 
+    public boolean contains(T value) {
+        if (head == null) {
+            return false;
+        };
+
+        Node<T> cursor = head;
+        while (cursor != null) {
+            if (cursor.value == value)
+                return true;
+            cursor = cursor.next;    
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         // [1 -> 2 -> 3]

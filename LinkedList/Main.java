@@ -11,12 +11,6 @@ public class Main {
          // head[value, second] - значение и ссылка на следующий
          // second[value, third] ...
 
-         // LinkedList in java
-         LinkedList<Integer> javaLinkedList = new LinkedList<>();
-         javaLinkedList.add(1);
-         javaLinkedList.add(2);
-         javaLinkedList.add(3);
-
          // с помощью собственного объекта 
          MyLinkedList<String> myLinkedList = new MyLinkedList<String>();
          System.out.println(myLinkedList.size());
@@ -24,9 +18,8 @@ public class Main {
          myLinkedList.add("str2");
          myLinkedList.add("str3");
 
-         System.out.println(myLinkedList.size());
-         myLinkedList.pop(1);
          System.out.println(myLinkedList); 
-         System.out.println(myLinkedList.size());  
+         System.out.println(myLinkedList.contains("str2"));
+         System.out.println(myLinkedList.contains("str"));
     }
 }
