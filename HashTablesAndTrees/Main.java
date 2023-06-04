@@ -11,10 +11,9 @@ public class Main {
 
         System.out.println();
 
-        System.out.println(tree.contains(8));
-        tree.remove(8);
-        System.out.println(tree.contains(8));
-        System.out.println(tree.contains(1));
+        System.out.println(tree.findFirst());
+        tree.remove(1);
+        System.out.println(tree.findFirst());
     }
 }
  

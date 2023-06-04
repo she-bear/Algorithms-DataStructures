@@ -1,5 +1,7 @@
 package HashTablesAndTrees;
 
+import java.util.NoSuchElementException;
+
 public class Tree {
     
     // 1. Вставка значения
@@ -120,5 +122,12 @@ public class Tree {
             return current;
 
         return findFirst(current.left);
+    }
+
+    public int findFirst() {
+        if (root == null) {
+            throw new NoSuchElementException();
+        }
+        return findFirst(root).value;
     }
 }
