@@ -19,7 +19,7 @@ public class Tree {
 
     private Node root;
 
-    public boolean  add(int value) {
+    public boolean add(int value) {
         if (root == null) {
             root = new Node(value);
             return true;
@@ -29,6 +29,7 @@ public class Tree {
     }
 
     private boolean addNode(Node current, int value) {
+
         // такой узел уже есть
         if (value == current.value) {
             return false;
@@ -50,6 +51,26 @@ public class Tree {
             } else {
                 return addNode(current.right, value);
             }
+        }
+    }
+
+    public boolean contains(int value) {
+        return findNode(root, value) != null;    
+    }
+
+    private Node findNode(Node current, int value) {
+        if (current == null) 
+            return null;
+
+        // найти узел current, значение которого равно value
+        if (value == current.value) {
+            return current;
+        } else if (value < current.value){
+            // проверяем левого потомка
+            return findNode(current.left, value);
+        } else {
+            // проверяем правого потомка
+            return findNode(current.right, value);
         }
     }
 }
