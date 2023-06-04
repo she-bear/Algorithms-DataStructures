@@ -6,45 +6,45 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
-public class Tree {
+public class Tree<T extends Comparable<T>> {
     
     // 1. Вставка значения
     // 2. Поиск значения (есть или нет)
     // 3. Удаление значения
     // 4. DFS (Depth-first-search) и BFS (Breath-first-search)
 
-    private class Node {
+    private class Node<T> {
         
-        int value;
-        Node left;
-        Node right;
+        T value;
+        Node<T> left;
+        Node<T> right;
 
-        public Node(int value) {
+        public Node(T value) {
             this.value = value;
         }
     }
 
-    private Node root;
+    private Node<T> root;
 
-    public boolean add(int value) {
+    public boolean add(T value) {
         if (root == null) {
-            root = new Node(value);
+            root = new Node<T>(value);
             return true;
         }
 
         return addNode(root, value);
     }
 
-    private boolean addNode(Node current, int value) {
+    private boolean addNode(Node<T> current, T value) {
 
         // такой узел уже есть
-        if (value == current.value) {
+        if (value.compareTo(current.value) == 0) {
             return false;
-        } else if (value < current.value) {
+        } else if (value.compareTo(current.value) < 0) {
             // вставляем в левое поддерево
             if (current.left == null) {
                 // левый узел пуст - просто вставка
-                current.left = new Node(value);
+                current.left = new Node<T>(value);
                 return true;
             } else {
                 // левый узел занят - опять нужны все проверки (рекурсия)
@@ -53,7 +53,7 @@ public class Tree {
         } else {
             // вставляем в правое поддерево
             if (current.right == null) {
-                current.right = new Node(value);
+                current.right = new Node<T>(value);
                 return true;
             } else {
                 return addNode(current.right, value);
@@ -61,18 +61,18 @@ public class Tree {
         }
     }
 
-    public boolean contains(int value) {
+    public boolean contains(T value) {
         return findNode(root, value) != null;    
     }
 
-    private Node findNode(Node current, int value) {
+    private Node<T> findNode(Node<T> current, T value) {
         if (current == null) 
             return null;
 
         // найти узел current, значение которого равно value
-        if (value == current.value) {
+        if (value.compareTo(current.value) == 0) {
             return current;
-        } else if (value < current.value){
+        } else if (value.compareTo(current.value) < 0){
             // проверяем левого потомка
             return findNode(current.left, value);
         } else {
@@ -81,20 +81,20 @@ public class Tree {
         }
     }
 
-    public void  remove (int value) {
+    public void  remove (T value) {
         root = removeNode(root, value);
     }
 
-    private Node removeNode(Node current, int value) {
+    private Node<T> removeNode(Node<T> current, T value) {
         if (current == null) {
             return null;
         }
 
-        if (value < current.value) {
+        if (value.compareTo(current.value) < 0) {
             // нужно удалить в левом поддереве
             current.left = removeNode(current.left, value);
            return current; 
-        } else if (value > current.value) {
+        } else if (value.compareTo(current.value) > 0) {
             // нужно удалить в правом поддереве
             current.right = removeNode(current.right, value);
             return current;
@@ -115,21 +115,21 @@ public class Tree {
 
         // 3. есть оба дочерних узла
         // нужно найти минимальный элемент справа (или - по другому алгоритму - максимальный слева)
-        Node smallestNodeOnTheRight = findFirst(current.right);
-        int smallestValueOnTheRight = smallestNodeOnTheRight.value;
+        Node<T> smallestNodeOnTheRight = findFirst(current.right);
+        T smallestValueOnTheRight = smallestNodeOnTheRight.value;
         current.value = smallestValueOnTheRight;
         current.right = removeNode(current.right, smallestValueOnTheRight);
         return current;
     }
 
-    private Node findFirst(Node current) {
+    private Node<T> findFirst(Node<T> current) {
         if (current.left == null)
             return current;
 
         return findFirst(current.left);
     }
 
-    public int findFirst() {
+    public T findFirst() {
         if (root == null) {
             throw new NoSuchElementException();
         }
@@ -137,11 +137,11 @@ public class Tree {
     }
 
     // DFS (Depth-first-search)
-    public List<Integer> dfs() {
+    public List<T> dfs() {
         if (root == null)
             return List.of();
 
-        List<Integer> list = new ArrayList<>();
+        List<T> list = new ArrayList<>();
         dfs(root, list);
         return list;
     }
@@ -150,7 +150,7 @@ public class Tree {
 
     // InOrder (see image)
     // возрастающий порядок
-    private void dfs(Node current, List<Integer> result) {
+    private void dfs(Node<T> current, List<T> result) {
         if (current.left != null) {
             dfs(current.left, result);
         }
@@ -162,7 +162,7 @@ public class Tree {
     }
 
     // PreOrder (see image)
-    private void preOrder(Node current, List<Integer> result) {
+    private void preOrder(Node<T> current, List<T> result) {
         result.add(current.value);
         if (current.left != null) {
             preOrder(current.left, result);
@@ -174,7 +174,7 @@ public class Tree {
     }
 
     // PostOrder (see image)
-    private void postOrder(Node current, List<Integer> result) {
+    private void postOrder(Node<T> current, List<T> result) {
         if (current.left != null) {
             postOrder(current.left, result);
         }
@@ -187,17 +187,17 @@ public class Tree {
 
     
     // BFS (Breath-first-search)
-    public List<Integer> bfs() {
+    public List<T> bfs() {
         if (root == null)
             return List.of();
 
-        List<Integer> result = new ArrayList<>();
-        Queue<Node> queue = new LinkedList<>();
+        List<T> result = new ArrayList<>();
+        Queue<Node<T>> queue = new LinkedList<>();
         queue.add(root);
 
         while (!queue.isEmpty()) {
             // достать текущий из очереди
-            Node next = queue.poll();
+            Node<T> next = queue.poll();
 
             // сохранить в результат
             result.add(next.value);
