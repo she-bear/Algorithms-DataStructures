@@ -7,13 +7,8 @@ public class Main {
         System.out.println(tree.add(1));
         System.out.println(tree.add(3));
         System.out.println(tree.add(12));
-        System.out.println(tree.add(12));
-
-        System.out.println();
-
-        System.out.println(tree.findFirst());
-        tree.remove(1);
-        System.out.println(tree.findFirst());
+        
+        System.out.println(tree.dfs());
     }
 }
  

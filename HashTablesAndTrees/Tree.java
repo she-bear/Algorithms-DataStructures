@@ -1,5 +1,7 @@
 package HashTablesAndTrees;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Tree {
@@ -7,6 +9,7 @@ public class Tree {
     // 1. Вставка значения
     // 2. Поиск значения (есть или нет)
     // 3. Удаление значения
+    // 4. DFS (Depth-first-search) и BFS (Breath-first-search)
 
     private class Node {
         
@@ -129,5 +132,53 @@ public class Tree {
             throw new NoSuchElementException();
         }
         return findFirst(root).value;
+    }
+
+    public List<Integer> dfs() {
+        if (root == null)
+            return List.of();
+
+        List<Integer> list = new ArrayList<>();
+        dfs(root, list);
+        return list;
+    }
+
+    // частные случаи поиска в глубину
+
+    // InOrder (see image)
+    // возрастающий порядок
+    private void dfs(Node current, List<Integer> result) {
+        if (current.left != null) {
+            dfs(current.left, result);
+        }
+
+        result.add(current.value);
+        if (current.right != null) {
+            dfs(current.right, result);
+        }
+    }
+
+    // PreOrder (see image)
+    private void preOrder(Node current, List<Integer> result) {
+        result.add(current.value);
+        if (current.left != null) {
+            preOrder(current.left, result);
+        }
+
+        if (current.right != null) {
+            preOrder(current.right, result);
+        }
+    }
+
+    // PostOrder (see image)
+    private void postOrder(Node current, List<Integer> result) {
+        if (current.left != null) {
+            postOrder(current.left, result);
+        }
+
+        if (current.right != null) {
+            postOrder(current.right, result);
+        }
+        result.add(current.value);
     }
 }
