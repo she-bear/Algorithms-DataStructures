@@ -73,4 +73,52 @@ public class Tree {
             return findNode(current.right, value);
         }
     }
+
+    public void  remove (int value) {
+        root = removeNode(root, value);
+    }
+
+    private Node removeNode(Node current, int value) {
+        if (current == null) {
+            return null;
+        }
+
+        if (value < current.value) {
+            // нужно удалить в левом поддереве
+            current.left = removeNode(current.left, value);
+           return current; 
+        } else if (value > current.value) {
+            // нужно удалить в правом поддереве
+            current.right = removeNode(current.right, value);
+            return current;
+        }
+
+        // удаление узла current
+        // 1. дочерних узлов нет
+        if (current.left == null && current.right == null)
+            return null;
+
+        // 2. есть только один дочерний узел
+        if (current.left == null && current.right != null) {
+            return current.right;
+        }
+        if (current.left != null && current.right == null) {
+            return current.left;
+        }
+
+        // 3. есть оба дочерних узла
+        // нужно найти минимальный элемент справа (или - по другому алгоритму - максимальный слева)
+        Node smallestNodeOnTheRight = findFirst(current.right);
+        int smallestValueOnTheRight = smallestNodeOnTheRight.value;
+        current.value = smallestValueOnTheRight;
+        current.right = removeNode(current.right, smallestValueOnTheRight);
+        return current;
+    }
+
+    private Node findFirst(Node current) {
+        if (current.left == null)
+            return current;
+
+        return findFirst(current.left);
+    }
 }
