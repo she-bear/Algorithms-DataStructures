@@ -9,6 +9,7 @@ public class Main {
         System.out.println(tree.add(12));
         
         System.out.println(tree.dfs());
+        System.out.println(tree.bfs());
     }
 }
  

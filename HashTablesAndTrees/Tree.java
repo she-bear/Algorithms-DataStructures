@@ -1,8 +1,10 @@
 package HashTablesAndTrees;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Queue;
 
 public class Tree {
     
@@ -134,6 +136,7 @@ public class Tree {
         return findFirst(root).value;
     }
 
+    // DFS (Depth-first-search)
     public List<Integer> dfs() {
         if (root == null)
             return List.of();
@@ -180,5 +183,32 @@ public class Tree {
             postOrder(current.right, result);
         }
         result.add(current.value);
+    }
+
+    
+    // BFS (Breath-first-search)
+    public List<Integer> bfs() {
+        if (root == null)
+            return List.of();
+
+        List<Integer> result = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            // достать текущий из очереди
+            Node next = queue.poll();
+
+            // сохранить в результат
+            result.add(next.value);
+
+            // положить в очередь детей
+            if (next.left != null)
+                queue.add(next.left);
+            if (next.right != null)
+                queue.add(next.right);
+        }
+
+        return result;
     }
 }
